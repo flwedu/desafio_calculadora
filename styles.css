@@ -1,0 +1,31 @@
+.app {
+  width: 25rem;
+  display: grid;
+  grid-template-rows: 2fr repeat(4, 1fr);
+}
+
+div {
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Buttons */
+input[type="button"] {
+  border: solid 1px;
+  border-radius: 3px;
+  background-color: white;
+}
+
+input.number {
+  color: blue;
+  border-color: blue;
+}
+
+input.operator {
+  color: purple;
+  border-color: purple;
+}
