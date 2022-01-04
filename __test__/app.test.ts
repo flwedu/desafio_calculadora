@@ -1,4 +1,5 @@
-import { Calculator, Display } from "../script"
+import Calculator from "../src/Calculator";
+import Display from "../src/Display";
 
 describe("Should receives the right value to operation with 4 basic signals (+, -, *, /)", () => {
 
