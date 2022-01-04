@@ -1,9 +1,17 @@
 export default class Display {
 
+    // This boolean is used to clear the display when a number input is clicked.
+    nextInputClearTheDisplay = false;
+
     constructor(private htmlDisplayElement: HTMLInputElement) {
     }
 
     addText(text: string) {
+        if (this.nextInputClearTheDisplay) {
+            this.clearText();
+            this.nextInputClearTheDisplay = false;
+        }
+
         this.htmlDisplayElement.value += text;
     }
 
@@ -13,9 +21,11 @@ export default class Display {
 
     setDisplay(newText: string) {
         this.htmlDisplayElement.value = newText;
+        this.nextInputClearTheDisplay = true;
     }
 
     getText() {
         return this.htmlDisplayElement.value;
+        this.nextInputClearTheDisplay = true;
     }
 }
