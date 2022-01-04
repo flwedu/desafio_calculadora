@@ -25,7 +25,7 @@ export default class Display {
     }
 
     getText() {
-        return this.htmlDisplayElement.value;
         this.nextInputClearTheDisplay = true;
+        return this.htmlDisplayElement.value;
     }
 }
