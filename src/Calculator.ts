@@ -34,19 +34,27 @@ export default class Calculator {
 
         // Verify if there's no function previously stored to do the results math
         if (!this.selectedOperation) {
-            this.selectedOperation = this.preparedOperation(clickedOperationSignal, Number(this.display.getText()));
+            this.selectedOperation = this.preparedOperation(clickedOperationSignal, this.getValueFromDisplay());
         }
         // If Already has a function stored, set the second value to do the math
         else {
             try {
-                const result = this.selectedOperation(Number(this.display.getText()));
-                this.display.setDisplay(result);
+                const result = this.selectedOperation(this.getValueFromDisplay());
+                this.updateDisplayText(result);
             }
             catch (error) {
                 console.log(error);
-                this.display.setDisplay("ERROR")
+                this.updateDisplayText("Error!")
             }
         }
+    }
+
+    getValueFromDisplay() {
+        return Number(this.display.getText());
+    }
+
+    updateDisplayText(text: string) {
+        this.display.setDisplay(text);
     }
 
     clearStoredOperation() {
