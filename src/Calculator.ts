@@ -17,7 +17,11 @@ export default class Calculator {
             "+": (valueA: number) => (valueB: number) => valueA + valueB,
             "-": (valueA: number) => (valueB: number) => valueA - valueB,
             "*": (valueA: number) => (valueB: number) => valueA * valueB,
-            "/": (valueA: number) => (valueB: number) => valueA / valueB
+            "/": (valueA: number) => (valueB: number) => valueA / valueB,
+            "=": (valueA: number) => {
+                if (this.selectedOperation)
+                    return this.selectedOperation(valueA)
+            }
         }
 
     private selectedOperation: Function | undefined;
