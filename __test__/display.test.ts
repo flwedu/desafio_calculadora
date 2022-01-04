@@ -1,4 +1,4 @@
-import { Display } from "../script";
+import Display from "../src/Display";
 
 it("Sould set the value of element", () => {
 
@@ -17,6 +17,9 @@ it("Sould add a text to value of element", () => {
 
     display.addText("111");
     expect(input.value).toEqual("22111");
+
+    display.addText(".54");
+    expect(input.value).toEqual("22111.54");
 })
 
 it("Sould clear the text value of element", () => {
@@ -27,4 +30,19 @@ it("Sould clear the text value of element", () => {
 
     display.clearText();
     expect(input.value).toEqual("");
+})
+
+it("Should delete the input.value after using getText method", () => {
+
+    const input = document.createElement("input");
+    const display = new Display(input);
+
+    display.addText("152")
+    const value = display.getText();
+
+    expect(value).toBe("152");
+
+    display.addText("2")
+    expect(input.value).toEqual("2");
+
 })
