@@ -1,6 +1,6 @@
 # Sobre a aplicação
 
-Projeto criado para treinar conceitos de TDD no desenvolvimento de aplicações typescript.
+Projeto de uma calculadora web criada para treinar conceitos de TDD no desenvolvimento de aplicações typescript.
 
 ## Rodando 🚀
 
