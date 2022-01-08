@@ -18,4 +18,18 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "build"),
+    },
+    compress: true,
+    port: 9000,
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+      hash: true,
+    }),
+  ],
 };
