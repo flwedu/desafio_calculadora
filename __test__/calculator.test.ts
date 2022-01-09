@@ -1,43 +1,80 @@
 import Calculator from "../src/Calculator";
-import Display from "../src/Display";
-import { EventEmitter } from "../src/EventEmitter";
+import { EventEmitter } from "../src/core/EventEmitter";
 
 describe("Should receives the right value to operation with 4 basic signals (+, -, *, /)", () => {
 
-    const input = document.createElement("input");
-    const display = new Display(input);
     const eventEmitter = EventEmitter;
-    const calculator = new Calculator(display, eventEmitter);
-
-    beforeEach(() => {
-        calculator.clearStoredOperation();
-    })
+    const calculator = new Calculator(eventEmitter);
 
     it("Sum", () => {
 
-        expect(calculator.calculate(6, 4, "+")).toBe(10);
-        expect(calculator.calculate(50, 5, "+")).toBe(55);
+        expect(calculator.calculate({
+            valueA: 6,
+            valueB: 4,
+            signal: "+"
+        })).toBe("10");
+        expect(calculator.calculate({
+            valueA: 50,
+            valueB: 5,
+            signal: "+"
+        })).toBe("55");
     })
 
     it("Division", () => {
-        expect(calculator.calculate(5, 6, "-")).toBe(-1);
-        expect(calculator.calculate(6, 5, "-")).toBe(1);
+        expect(calculator.calculate({
+            valueA: 5,
+            valueB: 6,
+            signal: "-"
+        })).toBe("-1");
+        expect(calculator.calculate({
+            valueA: 6,
+            valueB: 5,
+            signal: "-"
+        })).toBe("1");
     })
 
     it("Multiply", () => {
 
-        expect(calculator.calculate(8, 5, "*")).toBe(40);
-        expect(calculator.calculate(10, 5, "*")).toBe(50);
-        expect(calculator.calculate(5, -5, "*")).toBe(-25);
+        expect(calculator.calculate({
+            valueA: 6,
+            valueB: 4,
+            signal: "*"
+        })).toBe("24");
+        expect(calculator.calculate({
+            valueA: -10,
+            valueB: -5,
+            signal: "*"
+        })).toBe("50");
+        expect(calculator.calculate({
+            valueA: 5,
+            valueB: -5,
+            signal: "*"
+        })).toBe("-25");
     })
 
     it("Division", () => {
-        expect(calculator.calculate(10, 5, "/")).toBe(2);
-        expect(calculator.calculate(2, -1, "/")).toBe(-2);
-        expect(calculator.calculate(5, 2, "/")).toBe(2.5);
+        expect(calculator.calculate({
+            valueA: 10,
+            valueB: 5,
+            signal: "/"
+        })).toBe("2");
+        expect(calculator.calculate({
+            valueA: -2,
+            valueB: 1,
+            signal: "/"
+        })).toBe("-2");
+        expect(calculator.calculate({
+            valueA: -5,
+            valueB: -2,
+            signal: "/"
+        })).toBe("2.5");
     })
 
-    it("division by 0 returns Infinity", () => {
-        expect(calculator.calculate(5, 0, "/")).toBe(Infinity);
+    it("division by 0 returns Error", () => {
+        expect(calculator.calculate({
+            valueA: 5,
+            valueB: 0,
+            signal: "/"
+        })).toBe("Error!");
     })
 })
