@@ -5,31 +5,27 @@ export default class Calculator {
     private operations: {
         [index: string]: any
     } = {
-            "+": (valueA: number, valueB: number) => (valueA + valueB).toString(),
-            "-": (valueA: number, valueB: number) => (valueA - valueB).toString(),
-            "*": (valueA: number, valueB: number) => (valueA * valueB).toString(),
+            "+": (valueA: number, valueB: number) => (valueA + valueB),
+            "-": (valueA: number, valueB: number) => (valueA - valueB),
+            "*": (valueA: number, valueB: number) => (valueA * valueB),
             "/": (valueA: number, valueB: number) => {
                 if (valueB == 0)
-                    return "Error!"
-                return (valueA / valueB).toString()
+                    throw new Error("Math Error!")
+                return (valueA / valueB)
             }
         }
 
     calculate(data: IMathOperation): string {
         const { valueA, valueB, signal } = data;
         try {
-            let result = "";
-
             if (data.valueB != null)
-                result = this.operations[signal](valueA, valueB);
+                return this.operations[signal](valueA, valueB);
             else
-                result = this.operations[signal](valueA, valueA);
-
-            return result;
+                return this.operations[signal](valueA, valueA);
         }
-        catch (error) {
-            console.log(error);
-            return "Error!"
+        catch (err: any) {
+            console.log(err);
+            throw new Error(err.message)
         }
     }
 }
