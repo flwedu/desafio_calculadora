@@ -17,3 +17,5 @@ operatorButtons.forEach(button => {
         EventEmitter.emit("signalClicked", button.value)
     }
 })
+
+export { numberButtons, operatorButtons };

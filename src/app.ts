@@ -2,6 +2,7 @@ import Calculator from "./Calculator";
 import { EventEmitter } from "./core/EventEmitter";
 import { IMathOperation } from "./core/MathOperation";
 import Display from "./Display";
+import "./buttonManipulator";
 
 const displayHtmlElementRef = document.getElementById("display") as HTMLInputElement;
 
