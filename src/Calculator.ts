@@ -5,13 +5,13 @@ export default class Calculator {
     private operations: {
         [index: string]: any
     } = {
-            "+": (valueA: number, valueB: number) => valueA + valueB,
-            "-": (valueA: number, valueB: number) => valueA - valueB,
-            "*": (valueA: number, valueB: number) => valueA * valueB,
+            "+": (valueA: number, valueB: number) => (valueA + valueB).toString(),
+            "-": (valueA: number, valueB: number) => (valueA - valueB).toString(),
+            "*": (valueA: number, valueB: number) => (valueA * valueB).toString(),
             "/": (valueA: number, valueB: number) => {
                 if (valueB == 0)
                     return "Error!"
-                return valueA / valueB
+                return (valueA / valueB).toString()
             }
         }
 
@@ -20,12 +20,12 @@ export default class Calculator {
         try {
             let result = "";
 
-            if (data.valueB)
+            if (data.valueB != null)
                 result = this.operations[signal](valueA, valueB);
             else
                 result = this.operations[signal](valueA, valueA);
 
-            return result.toString();
+            return result;
         }
         catch (error) {
             console.log(error);
