@@ -69,4 +69,7 @@ EventEmitter.on("error", () => {
 
 EventEmitter.on("clear", () => {
     display.clearText();
+    valueA = null;
+    valueB = null;
+    lastSignal = ""
 })
