@@ -28,13 +28,13 @@ EventEmitter.on("numberClicked", (value: string) => {
 })
 
 EventEmitter.on("calculate", (data: IMathOperation) => {
-    const result = calculator.calculate(data);
-    display.setDisplay(result);
 
-    if (result != "Error!") {
-        valueA = Number(result);
+    try {
+        const result = calculator.calculate(data);
+        display.setDisplay(result.toString());
+        valueA = result;
     }
-    else {
+    catch (error) {
         EventEmitter.emit("error", null);
     }
 })
@@ -62,6 +62,7 @@ EventEmitter.on("signalClicked", (signal: string) => {
 })
 
 EventEmitter.on("error", () => {
+    display.setDisplay("Error!")
     valueA = null;
     valueB = null;
 })
