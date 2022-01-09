@@ -12,7 +12,7 @@ yarn install
 
 Após isso, é possível se testar a aplicação de duas formas:
 
-### Utilizando o webpack-dev-server
+<!-- ### Utilizando o webpack-dev-server (Not working yet)
 
 Para rodar a aplicação em `http://localhost:9000`, execute:
 
@@ -20,7 +20,7 @@ Para rodar a aplicação em `http://localhost:9000`, execute:
 yarn dev
 ```
 
-As configurações de porta podem ser alteradas no arquivo `webpack.config.js`.
+As configurações de porta podem ser alteradas no arquivo `webpack.config.js`. -->
 
 ### Geraldo uma build e abrindo o arquivo html
 
