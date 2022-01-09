@@ -16,8 +16,15 @@ export default class Calculator {
         }
 
     calculate(data: IMathOperation): string {
+        const { valueA, valueB, signal } = data;
         try {
-            const result = this.operations[data.signal](data.valueA, data.valueB);
+            let result = "";
+
+            if (data.valueB)
+                result = this.operations[signal](valueA, valueB);
+            else
+                result = this.operations[signal](valueA, valueA);
+
             return result.toString();
         }
         catch (error) {
