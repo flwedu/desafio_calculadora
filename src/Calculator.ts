@@ -1,5 +1,5 @@
 import { IMathOperation } from "./core/MathOperation";
-import { IEventEmitter } from "./EventEmitter";
+import { IEventEmitter } from "./core/EventEmitter";
 
 export default class Calculator {
 
