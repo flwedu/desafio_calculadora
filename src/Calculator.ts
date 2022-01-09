@@ -9,7 +9,11 @@ export default class Calculator {
             "+": (valueA: number, valueB: number) => valueA + valueB,
             "-": (valueA: number, valueB: number) => valueA - valueB,
             "*": (valueA: number, valueB: number) => valueA * valueB,
-            "/": (valueA: number, valueB: number) => valueA / valueB,
+            "/": (valueA: number, valueB: number) => {
+                if (valueB == 0)
+                    return "Error!"
+                return valueA / valueB
+            }
         }
 
     constructor(private eventEmitter: IEventEmitter) {
