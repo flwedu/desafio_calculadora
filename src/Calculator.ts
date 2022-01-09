@@ -15,7 +15,7 @@ export default class Calculator {
             }
         }
 
-    calculate(data: IMathOperation): string {
+    calculate(data: IMathOperation): number {
         const { valueA, valueB, signal } = data;
         try {
             if (data.valueB != null)
