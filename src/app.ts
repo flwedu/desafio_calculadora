@@ -18,6 +18,7 @@ let valueB: number | null = null;
  *  numberClicked
  *  calculate
  *  signalClicked
+ *  equalsClicked
  *  clear
  */
 
