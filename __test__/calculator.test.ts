@@ -1,10 +1,8 @@
 import Calculator from "../src/Calculator";
-import { EventEmitter } from "../src/core/EventEmitter";
 
 describe("Should receives the right value to operation with 4 basic signals (+, -, *, /)", () => {
 
-    const eventEmitter = EventEmitter;
-    const calculator = new Calculator(eventEmitter);
+    const calculator = new Calculator();
 
     it("Sum", () => {
 
