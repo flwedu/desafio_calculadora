@@ -48,7 +48,7 @@ EventEmitter.on("signalClicked", (signal: string) => {
         signal: lastSignal
     }
 
-    if (signal = "=") {
+    if (signal == "=") {
         EventEmitter.emit("calculate", data)
     }
 
