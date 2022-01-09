@@ -30,6 +30,8 @@ Para se gerar arquivos de build, execute o comando:
 yarn build
 ```
 
+O arquivo para html do app estará em build/index.html, e pode ser aberto com o navegador de sua preferência.
+
 ## Rodando testes unitários
 
 Para executar os testes, utilize:
