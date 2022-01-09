@@ -1,67 +1,68 @@
 import Display from "./Display";
+import { IEventEmitter } from "./EventEmitter";
 
 export default class Calculator {
 
-    /**
-     *List of avaliables operations to the calculator
-     *The index of properties is a string, wich is used to get the curry function
-     * @private
-     * @type {{
-     *         [index: string]: Function
-     *     }}
-     * @memberof App
-     */
     private operations: {
-        [index: string]: Function
+        [index: string]: any
     } = {
-            "+": (valueA: number) => (valueB: number) => valueA + valueB,
-            "-": (valueA: number) => (valueB: number) => valueA - valueB,
-            "*": (valueA: number) => (valueB: number) => valueA * valueB,
-            "/": (valueA: number) => (valueB: number) => valueA / valueB,
-            "=": (valueA: number) => {
-                if (this.selectedOperation)
-                    return this.selectedOperation(valueA)
-            }
+            "+": (valueA: number, valueB: number) => valueA + valueB,
+            "-": (valueA: number, valueB: number) => valueA - valueB,
+            "*": (valueA: number, valueB: number) => valueA * valueB,
+            "/": (valueA: number, valueB: number) => valueA / valueB,
         }
 
-    private selectedOperation: Function | undefined;
+    private valueA: number = Infinity
+    private valueB: number = Infinity
 
-    constructor(private display: Display) {
+    constructor(private display: Display, private eventEmitter: IEventEmitter) {
+        this.init();
     }
 
-    preparedOperation(operationSignal: string, valueA: number) {
+    private init() {
+        this.eventEmitter.on("calculate", (signal: string) => {
+            this.calculate(this.valueA, this.valueB, signal);
+        })
 
-        return this.operations[operationSignal](valueA);
-    }
+        this.eventEmitter.on("clickSignal", (signal: string) => {
 
-    storeValueOrDoTheMath(clickedOperationSignal: string) {
-
-        // Verify if there's no function previously stored to do the results math
-        if (!this.selectedOperation) {
-            this.selectedOperation = this.preparedOperation(clickedOperationSignal, this.getValueFromDisplay());
-        }
-        // If Already has a function stored, set the second value to do the math
-        else {
-            try {
-                const result = this.selectedOperation(this.getValueFromDisplay());
-                this.updateDisplayText(result);
+            if (this.valueA == Infinity) {
+                this.valueA = this.getValueFromDisplay();
             }
-            catch (error) {
-                console.log(error);
-                this.updateDisplayText("Error!")
+            else {
+                this.valueB = this.getValueFromDisplay();
+                this.eventEmitter.emit("calculate", signal)
             }
+
+        })
+    }
+
+    calculate(valueA: number, valueB: number, signal: string) {
+        try {
+            const result = this.operations[signal](valueA, valueB);
+            this.updateDisplayText(result);
+            this.valueA = result;
+            this.valueB = Infinity;
+            return result;
+        }
+        catch (error) {
+            console.log(error);
+            this.updateDisplayText("Error!");
+            this.valueA = Infinity;
+            this.valueB = Infinity;
         }
     }
 
-    getValueFromDisplay() {
+    private getValueFromDisplay() {
         return Number(this.display.getText());
     }
 
-    updateDisplayText(text: string) {
-        this.display.setDisplay(text);
+    private updateDisplayText(text: string) {
+        this.eventEmitter.emit("updateDisplay", text);
     }
 
     clearStoredOperation() {
-        this.selectedOperation = undefined;
+        this.valueA = Infinity;
+        this.valueB = Infinity;
     }
 }
