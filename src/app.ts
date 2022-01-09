@@ -3,6 +3,7 @@ import { EventEmitter } from "./core/EventEmitter";
 import { IMathOperation } from "./core/MathOperation";
 import Display from "./Display";
 import "./buttonManipulator";
+import "./style/styles.css"
 
 const displayHtmlElementRef = document.getElementById("display") as HTMLInputElement;
 
