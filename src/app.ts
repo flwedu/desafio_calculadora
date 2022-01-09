@@ -19,6 +19,7 @@ let valueB: number | null = null;
  *  calculate
  *  signalClicked
  *  equalsClicked
+ *  error
  *  clear
  */
 
@@ -29,8 +30,13 @@ EventEmitter.on("numberClicked", (value: string) => {
 EventEmitter.on("calculate", (data: IMathOperation) => {
     const result = calculator.calculate(data);
     display.setDisplay(result);
-    valueA = null;
-    valueB = null;
+
+    if (result != "Error!") {
+        valueA = Number(result);
+    }
+    else {
+        EventEmitter.emit("error", null);
+    }
 })
 
 EventEmitter.on("signalClicked", (signal: string) => {
@@ -40,7 +46,7 @@ EventEmitter.on("signalClicked", (signal: string) => {
 
     if (!valueA)
         valueA = Number(display.getText());
-    else
+    else if (!valueB)
         valueB = Number(display.getText());
 
     const data: IMathOperation = {
@@ -53,6 +59,11 @@ EventEmitter.on("signalClicked", (signal: string) => {
         EventEmitter.emit("calculate", data)
     }
 
+})
+
+EventEmitter.on("error", () => {
+    valueA = null;
+    valueB = null;
 })
 
 EventEmitter.on("clear", () => {
