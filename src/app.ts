@@ -9,6 +9,7 @@ const displayHtmlElementRef = document.getElementById("display") as HTMLInputEle
 
 const display = new Display(displayHtmlElementRef);
 const calculator = new Calculator();
+const eventEmitter = new EventEmitter();
 
 let lastSignal = "";
 let valueA: number | null = null;
@@ -24,11 +25,11 @@ let valueB: number | null = null;
  *  clear
  */
 
-EventEmitter.on("numberClicked", (value: string) => {
+eventEmitter.on("numberClicked", (value: string) => {
     display.addText(value);
 })
 
-EventEmitter.on("calculate", (data: IMathOperation) => {
+eventEmitter.on("calculate", (data: IMathOperation) => {
 
     try {
         const result = calculator.calculate(data);
@@ -36,11 +37,11 @@ EventEmitter.on("calculate", (data: IMathOperation) => {
         valueA = result;
     }
     catch (error) {
-        EventEmitter.emit("error", null);
+        eventEmitter.emit("error", null);
     }
 })
 
-EventEmitter.on("signalClicked", (signal: string) => {
+eventEmitter.on("signalClicked", (signal: string) => {
 
     if (signal != "=")
         lastSignal = signal;
@@ -57,20 +58,22 @@ EventEmitter.on("signalClicked", (signal: string) => {
     }
 
     if (signal == "=") {
-        EventEmitter.emit("calculate", data)
+        eventEmitter.emit("calculate", data)
     }
 
 })
 
-EventEmitter.on("error", () => {
+eventEmitter.on("error", () => {
     display.setDisplay("Error!")
     valueA = null;
     valueB = null;
 })
 
-EventEmitter.on("clear", () => {
+eventEmitter.on("clear", () => {
     display.clearText();
     valueA = null;
     valueB = null;
     lastSignal = ""
 })
+
+export { eventEmitter };
