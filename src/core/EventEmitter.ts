@@ -1,20 +1,27 @@
-export const EventEmitter = {
-    events: new Map<string, Function[]>(),
+class EventEmitter {
 
-    on: (topic: string, fn: Function) => {
-        let presentFns = EventEmitter.events.get(topic);
+    private events;
 
-        if (EventEmitter.events.has(topic)) {
+    constructor() {
+        this.events = new Map<string, Function[]>();
+    }
+
+    on(topic: string, fn: Function) {
+        const presentFns = this.events.get(topic);
+
+        if (this.events.has(topic)) {
             //@ts-ignore
-            EventEmitter.events.set(topic, [...presentFns, fn]);
+            this.events.set(topic, [...presentFns, fn]);
         }
-        return EventEmitter.events.set(topic, [fn]);
-    },
+        return this.events.set(topic, [fn]);
+    };
 
-    emit: (topic: string, data: any) => {
-        const listeners = EventEmitter.events.get(topic);
+    emit(topic: string, data: any) {
+        const listeners = this.events.get(topic);
         if (Array.isArray(listeners) && listeners.length) {
             listeners.forEach((event) => event(data));
         }
-    },
+    }
 };
+
+export { EventEmitter }
