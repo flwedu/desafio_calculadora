@@ -1,11 +1,8 @@
 .app {
-  width: 25rem;
+  width: 20rem;
   display: grid;
   grid-template-rows: 2fr repeat(4, 1fr);
-}
-
-div {
-  width: 100%;
+  gap: 1px;
 }
 
 .row {
@@ -15,17 +12,16 @@ div {
 
 /* Buttons */
 input[type="button"] {
-  border: solid 1px;
+  border: none;
   border-radius: 3px;
-  background-color: white;
+  width: 3.5rem;
+  height: 2.8rem;
 }
 
 input.number {
-  color: blue;
-  border-color: blue;
+  background-color: #b1d4e0;
 }
 
 input.operator {
-  color: purple;
-  border-color: purple;
+  background-color: #2e8bc0;
 }
