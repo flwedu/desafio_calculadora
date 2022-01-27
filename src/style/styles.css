@@ -2,12 +2,25 @@
   width: 20rem;
   display: grid;
   grid-template-rows: 2fr repeat(4, 1fr);
-  gap: 1px;
+  gap: 3px;
+  justify-items: center;
+  background-color: #e5ddc8;
 }
 
 .row {
+  justify-items: center;
   display: grid;
+  gap: 3px;
   grid-template-columns: repeat(4, 1fr);
+}
+/* Display */
+#display {
+  margin: 0.5rem 1rem;
+  font-size: 1.5rem;
+  width: 18rem;
+  height: 5rem;
+
+  text-align: end;
 }
 
 /* Buttons */
