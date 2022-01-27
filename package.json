@@ -14,8 +14,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "webpack",
-    "dev": "webpack serve"
+    "build": "webpack"
   },
   "dependencies": {}
 }
