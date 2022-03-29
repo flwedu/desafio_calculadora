@@ -1,0 +1,56 @@
+$color__bg: #f6bd60;
+$color__numbers: #f7ede2;
+$color__signal: #d5cac3;
+$color__shadow: #626262;
+$size__button: 3.5rem;
+$size__font: 1.5rem;
+$size__app: 30rem;
+
+.app {
+  height: $size__app;
+  width: calc($size__app * 0.7);
+  display: grid;
+  grid-template-rows: 1fr repeat(6, 1fr);
+  background-color: $color__bg;
+  border-radius: 0.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+/* Display */
+#display {
+  margin: 0.5rem 1rem;
+  font-size: 1.5rem;
+  width: 18rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  text-align: end;
+  box-shadow: inset 0.2rem 0.1rem;
+}
+
+/* Buttons */
+input[type="button"] {
+  font-size: $size__font;
+  border: none;
+  border-radius: 0.5rem;
+  width: $size__button;
+  height: $size__button;
+  box-shadow: 0.2rem 0.1rem $color__shadow;
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(4px);
+  }
+}
+
+.button {
+  background-color: $color__numbers;
+}
+
+.signal {
+  background-color: $color__signal;
+}

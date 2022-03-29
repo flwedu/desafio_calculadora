@@ -1,31 +1,40 @@
-import { IMathOperation } from "./core/MathOperation";
+import { MathOperation } from "./MathOperation";
 
-export default class Calculator {
+export class Calculator {
 
-    private operations: {
-        [index: string]: any
-    } = {
-            "+": (valueA: number, valueB: number) => (valueA + valueB),
-            "-": (valueA: number, valueB: number) => (valueA - valueB),
-            "*": (valueA: number, valueB: number) => (valueA * valueB),
-            "/": (valueA: number, valueB: number) => {
-                if (valueB == 0)
-                    throw new Error("Math Error!")
-                return (valueA / valueB)
-            }
+    constructor() { };
+
+    private lastOperation = new MathOperation();
+    private mathTable = {
+        "+": (a: string, b: string) => String(Number(a) + Number(b)),
+        "-": (a: string, b: string) => String(Number(a) - Number(b)),
+        "*": (a: string, b: string) => String(Number(a) * Number(b)),
+        "/": (a: string, b: string) => String(Number(a) / Number(b)),
+    };
+
+    doMath(a: string, signal?: string, b?: string): string {
+
+        if (a && !b && !signal) {
+            if (this.lastOperationIsEmpty()) return a;
+            b = this.lastOperation.b;
+            signal = this.lastOperation.signal;
+        }
+        if (a && signal && !b) {
+            b = a;
         }
 
-    calculate(data: IMathOperation): number {
-        const { valueA, valueB, signal } = data;
-        try {
-            if (data.valueB != null)
-                return this.operations[signal](valueA, valueB);
-            else
-                return this.operations[signal](valueA, valueA);
-        }
-        catch (err: any) {
-            console.log(err);
-            throw new Error(err.message)
-        }
+        this.lastOperation = new MathOperation({
+            a, signal
+            , b
+        });
+        return this.mathTable[signal](a, b);
+    }
+
+    lastOperationIsEmpty() {
+        return !this.lastOperation.a && !this.lastOperation.b
+    }
+
+    clear() {
+        this.lastOperation = new MathOperation();
     }
 }
