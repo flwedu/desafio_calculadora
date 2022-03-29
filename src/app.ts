@@ -14,19 +14,25 @@ eventEmitter.on("number", function (input: string) {
 
 eventEmitter.on("signal", function (input: string) {
   const [_, a, signal, b] = displayManager.extractExpressionValues();
-  if (signal) eventEmitter.emit("=", {});
+  if (signal && !b) displayManager.backspace();
+  if (signal && b) doMathAndUpdateDisplay();
   displayManager.addTextToDisplay(input);
 });
 
 eventEmitter.on("equal", function () {
-  const [_, a, signal, b] = displayManager.extractExpressionValues();
-  const result = calculator.doMath(a, signal, b);
-  displayManager.setTextToDisplay(result);
+  doMathAndUpdateDisplay();
 });
 
 eventEmitter.on("clear", function () {
   displayManager.clearDisplay();
   calculator.clear();
 })
+
+
+function doMathAndUpdateDisplay() {
+  const [_, a, signal, b] = displayManager.extractExpressionValues();
+  const result = calculator.doMath(a, signal, b);
+  displayManager.setTextToDisplay(result);
+}
 
 export { eventEmitter };

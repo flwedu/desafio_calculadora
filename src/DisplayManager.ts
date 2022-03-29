@@ -36,4 +36,10 @@ export class DisplayManager {
   clearDisplay() {
     this.setTextToDisplay("");
   }
+
+  backspace() {
+    let actual = this.displayHtmlElement.value;
+    actual = actual.slice(0, -1);
+    this.displayHtmlElement.value = actual;
+  }
 }
