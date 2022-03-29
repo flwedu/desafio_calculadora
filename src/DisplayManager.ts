@@ -22,7 +22,6 @@ export class DisplayManager {
 
   extractExpressionValues() {
     const array = this.fullExpressionRegexp.exec(this.displayHtmlElement.value);
-    console.log(array);
     return array;
   }
 
