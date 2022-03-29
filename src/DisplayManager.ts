@@ -3,16 +3,21 @@ import { MathOperation } from "./MathOperation";
 export class DisplayManager {
 
   private fullExpressionRegexp = /^(-?\d+\.?\d*)([*\-+\/]?)(\d+\.?\d*)?$/;
+  private clearOnNextInput = false;
 
   constructor(private readonly displayHtmlElement: HTMLInputElement) {
   }
 
   addTextToDisplay(input: string) {
+    if (this.clearOnNextInput) {
+      this.clearDisplay();
+    }
     this.displayHtmlElement.value += input;
   }
 
   setTextToDisplay(text: string) {
     this.displayHtmlElement.value = text;
+    this.clearOnNextInput = true;
   }
 
   extractMathOperation(): MathOperation {
@@ -30,11 +35,12 @@ export class DisplayManager {
   }
 
   displayIsEmpty() {
-    return this.displayHtmlElement.value.length != 0;
+    return this.displayHtmlElement.value.length == 0;
   }
 
   clearDisplay() {
     this.setTextToDisplay("");
+    this.clearOnNextInput = false;
   }
 
   backspace() {
