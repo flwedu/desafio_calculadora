@@ -1,4 +1,4 @@
-import { eventEmitter } from "./app";
+import { EventEmitter } from "./core/EventEmitter";
 
 // Set var to elementos
 const numberButtons = document.querySelectorAll(".button") as NodeListOf<HTMLInputElement>;
@@ -9,22 +9,22 @@ const clearButton = document.getElementById("button_clear") as HTMLInputElement;
 // Set function to buttons
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        eventEmitter.emit("number", button.value);
+        EventEmitter.emit("number", button.value);
     });
 })
 
 signalButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        eventEmitter.emit("signal", button.value);
+        EventEmitter.emit("signal", button.value);
     });
 })
 
 equalButton.addEventListener("click", () => {
-    eventEmitter.emit("equal", {});
+    EventEmitter.emit("equal", {});
 });
 
 clearButton.addEventListener("click", () => {
-    eventEmitter.emit("clear", {});
+    EventEmitter.emit("clear", {});
 });
 
 export { numberButtons, signalButtons, equalButton, clearButton }

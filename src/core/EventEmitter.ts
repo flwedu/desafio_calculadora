@@ -1,10 +1,6 @@
-class EventEmitter {
+const EventEmitter = {
 
-    private events;
-
-    constructor() {
-        this.events = new Map<string, Function[]>();
-    }
+    events: new Map<string, Function[]>(),
 
     on(topic: string, fn: Function) {
         const presentFns = this.events.get(topic);
@@ -14,7 +10,7 @@ class EventEmitter {
             this.events.set(topic, [...presentFns, fn]);
         }
         return this.events.set(topic, [fn]);
-    };
+    },
 
     emit(topic: string, data: any) {
         const listeners = this.events.get(topic);

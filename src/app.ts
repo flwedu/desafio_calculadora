@@ -1,38 +1,41 @@
 import { Calculator } from "./Calculator";
 import { EventEmitter } from "./core/EventEmitter";
 import { DisplayManager } from "./DisplayManager";
-import "./Buttons";
-import "./style/main.scss";
 
-const displayManager = new DisplayManager(document.getElementById("display") as HTMLInputElement);
-const calculator = new Calculator();
-const eventEmitter = new EventEmitter();
+export class App {
 
-eventEmitter.on("number", function (input: string) {
-  displayManager.addTextToDisplay(input);
-});
+  constructor(private readonly display: DisplayManager, private readonly calculator: Calculator, private eventEmitter: typeof EventEmitter) { }
 
-eventEmitter.on("signal", function (input: string) {
-  const [_, a, signal, b] = displayManager.extractExpressionValues();
-  if (signal && !b) displayManager.backspace();
-  if (signal && b) doMathAndUpdateDisplay();
-  displayManager.addTextToDisplay(input);
-});
+  initialize() {
 
-eventEmitter.on("equal", function () {
-  doMathAndUpdateDisplay();
-});
+    this.eventEmitter.on("number", (input: string) => {
+      this.display.addTextToDisplay(input);
+    });
 
-eventEmitter.on("clear", function () {
-  displayManager.clearDisplay();
-  calculator.clear();
-})
+    this.eventEmitter.on("signal", (input: string) => {
+      if (this.display.displayIsEmpty()) return;
+      const [_, a, signal, b] = this.display.extractExpressionValues();
+      if (signal && !b) this.display.backspace();
+      if (signal && b) this.doMathAndUpdateDisplay();
+      this.display.addTextToDisplay(input);
+    });
 
+    this.eventEmitter.on("equal", () => {
+      this.doMathAndUpdateDisplay();
+    });
 
-function doMathAndUpdateDisplay() {
-  const [_, a, signal, b] = displayManager.extractExpressionValues();
-  const result = calculator.doMath(a, signal, b);
-  displayManager.setTextToDisplay(result);
+    this.eventEmitter.on("clear", () => {
+      this.display.clearDisplay();
+      this.calculator.clear();
+    })
+
+  }
+  doMathAndUpdateDisplay() {
+    const [_, a, signal, b] = this.display.extractExpressionValues();
+    const result = this.calculator.doMath(a, signal, b);
+    this.display.setTextToDisplay(result);
+  }
 }
 
-export { eventEmitter };
+
+
