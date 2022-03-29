@@ -13,6 +13,7 @@ export class App {
     });
 
     this.eventEmitter.on("signal", (input: string) => {
+      if (this.display.displayIsEmpty()) return;
       const [_, a, signal, b] = this.display.extractExpressionValues();
       if (signal && !b) this.display.backspace();
       if (signal && b) this.doMathAndUpdateDisplay();
