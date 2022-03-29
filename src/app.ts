@@ -1,8 +1,6 @@
 import { Calculator } from "./Calculator";
 import { EventEmitter } from "./core/EventEmitter";
 import { DisplayManager } from "./DisplayManager";
-import "./Buttons";
-import "./style/main.scss";
 
 const displayManager = new DisplayManager(document.getElementById("display") as HTMLInputElement);
 const calculator = new Calculator();
@@ -27,7 +25,6 @@ eventEmitter.on("clear", function () {
   displayManager.clearDisplay();
   calculator.clear();
 })
-
 
 function doMathAndUpdateDisplay() {
   const [_, a, signal, b] = displayManager.extractExpressionValues();
