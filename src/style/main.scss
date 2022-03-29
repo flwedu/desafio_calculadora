@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
+
 $color__bg: #f6bd60;
 $color__numbers: #f7ede2;
 $color__signal: #d5cac3;
 $color__shadow: #626262;
+$color__button: #5f1e18;
 $size__button: 3.5rem;
 $size__font: 1.5rem;
 $size__app: 30rem;
@@ -21,25 +24,30 @@ $size__app: 30rem;
   justify-items: center;
   align-items: center;
 }
-/* Display */
+
 #display {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
   margin: 0.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   width: 18rem;
   height: 5rem;
   border-radius: 0.5rem;
   text-align: end;
-  box-shadow: inset 0.2rem 0.1rem;
+  box-shadow: inset 0.1rem 0.2rem;
 }
 
 /* Buttons */
-input[type="button"] {
+.button {
+  font-family: "Roboto", sans-serif;
+  color: $color__button;
   font-size: $size__font;
+  font-weight: 900;
   border: none;
   border-radius: 0.5rem;
   width: $size__button;
   height: $size__button;
-  box-shadow: 0.2rem 0.1rem $color__shadow;
+  box-shadow: 0.1rem 0.2rem $color__shadow;
 
   &:active {
     box-shadow: none;
@@ -47,7 +55,7 @@ input[type="button"] {
   }
 }
 
-.button {
+.number {
   background-color: $color__numbers;
 }
 

@@ -1,7 +1,7 @@
 import { EventEmitter } from "./core/EventEmitter";
 
 // Set var to elementos
-const numberButtons = document.querySelectorAll(".button") as NodeListOf<HTMLInputElement>;
+const numberButtons = document.querySelectorAll(".number") as NodeListOf<HTMLInputElement>;
 const signalButtons = document.querySelectorAll(".signal") as NodeListOf<HTMLInputElement>;
 const equalButton = document.getElementById("button_equal") as HTMLInputElement;
 const clearButton = document.getElementById("button_clear") as HTMLInputElement;
