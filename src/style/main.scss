@@ -9,6 +9,12 @@ $size__button: 3.5rem;
 $size__font: 1.5rem;
 $size__app: 30rem;
 
+body {
+  position: fixed;
+  top: 5%;
+  left: calc(50% - $size__app / 2);
+}
+
 .app {
   height: $size__app;
   width: calc($size__app * 0.7);
