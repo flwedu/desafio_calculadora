@@ -18,10 +18,12 @@ export class App {
       if (signal && !b) this.display.backspace();
       if (signal && b) this.doMathAndUpdateDisplay();
       this.display.addTextToDisplay(input);
+      this.display.setClearOnNextInput(false);
     });
 
     this.eventEmitter.on("equal", () => {
       this.doMathAndUpdateDisplay();
+      this.display.setClearOnNextInput(true);
     });
 
     this.eventEmitter.on("clear", () => {

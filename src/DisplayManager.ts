@@ -9,7 +9,7 @@ export class DisplayManager {
   }
 
   addTextToDisplay(input: string) {
-    if (this.clearOnNextInput) {
+    if (this.clearOnNextInput && /\d/.test(input) && /[\*\+\/-]/.test(this.displayHtmlElement.value)) {
       this.clearDisplay();
     }
     this.displayHtmlElement.value += input;
@@ -17,7 +17,6 @@ export class DisplayManager {
 
   setTextToDisplay(text: string) {
     this.displayHtmlElement.value = text;
-    this.clearOnNextInput = true;
   }
 
   extractMathOperation(): MathOperation {
@@ -40,7 +39,11 @@ export class DisplayManager {
 
   clearDisplay() {
     this.setTextToDisplay("");
-    this.clearOnNextInput = false;
+    this.setClearOnNextInput(false);
+  }
+
+  setClearOnNextInput(value: boolean) {
+    this.clearOnNextInput = value;
   }
 
   backspace() {
