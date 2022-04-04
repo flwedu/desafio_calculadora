@@ -9,7 +9,7 @@ export class DisplayManager {
   }
 
   addTextToDisplay(input: string) {
-    if (this.clearOnNextInput && /\d/.test(input) && /[\*\+\/-]/.test(this.displayHtmlElement.value)) {
+    if (this.clearOnNextInput && /\d+/.test(input)) {
       this.clearDisplay();
     }
     this.displayHtmlElement.value += input;
