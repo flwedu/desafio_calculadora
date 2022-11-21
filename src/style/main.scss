@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
 
-$color__bg: #f6bd60;
-$color__numbers: #f7ede2;
-$color__signal: #d5cac3;
-$color__shadow: #626262;
-$color__button: #5f1e18;
+$color__bg: hsl(260, 90%, 55%);
+$color__numbers: hsla(0, 0%, 100%, 0.8);
+$color__signal: hsla(0, 0%, 100%, 0.7);
+$color__shadow: hsl(0, 0%, 38%);
+$color__button: hsla(0, 0%, 11%, 0.9);
 $size__button: 3.5rem;
 $size__font: 1.5rem;
 $size__app: 30rem;
