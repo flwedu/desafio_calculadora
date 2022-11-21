@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
 
-$color__bg: hsl(260, 90%, 55%);
 $color__numbers: hsla(0, 0%, 100%, 0.8);
 $color__signal: hsla(0, 0%, 100%, 0.7);
 $color__shadow: hsl(0, 0%, 38%);
 $color__button: hsla(0, 0%, 11%, 0.9);
+
+$color__bg: rgb(106,37,244);
+$color__bg-gradient: linear-gradient(357deg, rgba(106,37,244,1) 0%, rgba(106,37,244,1) 55%, rgba(0,212,255,1) 100%);
 $size__button: 3.5rem;
 $size__font: 1.5rem;
 $size__app: 30rem;
@@ -21,6 +23,7 @@ body {
   display: grid;
   grid-template-rows: 1fr repeat(6, 1fr);
   background-color: $color__bg;
+  background-image: $color__bg-gradient;
   border-radius: 0.5rem;
 }
 
